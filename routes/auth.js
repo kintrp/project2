@@ -49,4 +49,38 @@ router.post('/signup', (req, res)=> {
 		.catch(err=>console.log(err)); 
 })
 
+// Login
+
+router.post('/login', (req, res, next)=> {
+	const { username, password } = req.body;
+
+	User.findOne ({ username : username })
+		.then(userFromDB => {
+			if (userFromDB === 0) {
+				res.render('login', {message: 'Invalid credentials'});
+				return;
+			}
+			if (bcrypt.compareSync(password,userFromDB.password)) {
+				req.session.user = userFromDB;
+				res.redirect('/profile');
+			} else {
+				res.render('login', {message: 'Invalid credentials'});
+				return;
+			}
+		})
+})
+
+// Logout
+
+router.get('/logout', (req, res, next) => {
+	req.session.destroy(err=>{
+		if (err) {
+			next(err);
+		} else {
+			res.redirect('/');
+		}
+	})
+}) 
+
+
 module.exports = router;
