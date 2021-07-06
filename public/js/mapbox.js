@@ -1,4 +1,5 @@
-mapboxgl.acessToken='pk.eyJ1Ijoia2ludHJwIiwiYSI6ImNrcXMwYjhkbDEybnAydW8xNTI5MDNpODYifQ.3CiKMUdlxVCvRwanbAmrPQ'
+mapboxgl.acessToken='pk.eyJ1Ijoia2ludHJwIiwiYSI6ImNrcXM0OGQwYjFsenEyb3N0anBvaWx5YnAifQ.IbNymNclQMX5y2FBKnXsTA'
+
 console.log('HelloFromMapBox');
 const map = new mapboxgl.Map({
     container: 'map', // container ID
@@ -11,7 +12,6 @@ const map = new mapboxgl.Map({
 
 const nav = new mapboxgl.NavigationControl();
 map.addControl(nav, 'top-left');
-
 
 // Set markers 
 
