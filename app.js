@@ -39,6 +39,7 @@ app.use(
 
 // end of session configuration */
 
+
 // default value for title local
 const projectName = "project2";
 const capitalized = (string) => string[0].toUpperCase() + string.slice(1).toLowerCase();

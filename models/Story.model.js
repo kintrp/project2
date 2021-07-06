@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const {Schema, model} = mongoose;
 
+// TODO: Please make sure you edit the story model to whatever makes sense in this case
 const storySchema = new Schema({
-      title: {
+
+    title: {
         type: String,
         required: true,
         trim: true,
@@ -26,3 +28,5 @@ const storySchema = new Schema({
 const Story = model("Story", storySchema);
 
 module.exports = Story; 
+
+
