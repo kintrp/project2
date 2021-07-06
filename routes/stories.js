@@ -33,5 +33,35 @@ router.get('/stories', (req, res, next) => {
 		})
 });
 
+// locations stories
+
+router.get('/locations', (req, res, next) => {
+  Story.find()
+		.then(storyFromDB => {
+
+			res.json({stories:storyFromDB});
+		})
+		.catch(err => {
+			console.log(err)
+		})
+})
+
+// Details
+
+/* 
+
+router.get('/:id', (req,res, next)=> {
+  const celebId = req.params.id;
+  console.log(celebId);
+  Celebrity.findById(celebId)
+    .then(celebDetails => {
+      res.render('celebrities/show', {details : celebDetails })
+      console.log(celebDetails);
+    })
+    .catch(error => console.log('error while retrieving data from DB', error))
+}) 
+
+*/
+
 
 module.exports = router;
