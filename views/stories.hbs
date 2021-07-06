@@ -1,0 +1,26 @@
+<h1>Stories</h1>
+
+{{#each storyList}}
+
+   <a href="/stories/{{_id}}">
+   
+   <p> title:
+       <br> <span style="color: black;font-weight:bold"></span> {{title}} </span> 
+   </p>
+
+   <p> author:
+       <br> <span style="color: black;font-weight:bold"></span> {{author}} </span> 
+   </p>
+
+{{/each}} 
+
+      <div id='map' style='width: 100vw; height: 100vh;'></div>
+
+
+<a href="/signup" class="button1">signup</a>
+<a href="/login" class="button">login</a>
+ 
+
+            <script src="/js/mapbox.js"></script>
+
+

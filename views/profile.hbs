@@ -2,4 +2,24 @@
 
 <h1>Hello {{user.username}}!</h1>
 
+<form action="/profile" method="POST"\>
+
+    <label for="title">title</label> 
+    <input id="title" type="text" name="title">
+
+    <label for="story">story</label> 
+    <input id="story" type="text" name="story">
+
+    <label for="genre">genre</label> 
+    <input id="genre" type="text" name="genre">
+  
+    <label for="city">city</label> 
+    <input id="city" type="number" name="city">
+
+  <button type="submit">Add</button>
+
+</form>
+
 <a href="/logout"> Log out</a>
+
+<a href="/movies" class="button">Back</a>
