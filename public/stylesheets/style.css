@@ -26,3 +26,19 @@ h1 {
   top: 60px;
   right: 60px;
 }
+
+.button1 {
+  background-color: black; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 80px;
+  height: 20px;
+  position: absolute;
+  top: 120px;
+  right: 60px;
+}
