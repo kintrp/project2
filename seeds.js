@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+/*const mongoose = require('mongoose');
 
 const Story = require('./models/Story.model');
 
@@ -7,7 +7,7 @@ mongoose.connect('mongodb://localhost/project2', {
 	useUnifiedTopology: true
 });
 
-const story = [
+const stories = [
 	{
 		title: "Abebe Bikila-Roma 1960",
 		body:
@@ -25,13 +25,13 @@ const story = [
 	}
 ]
 
-Story.insertMany(story)
+Story.insertMany(stories)
 	.then(story => {
-		console.log(`Success! Added ${story.length} story to the database`)
+		console.log(`Success! Added ${stories.length} story to the database`)
 		mongoose.connection.close();
 	})
 	.catch(err => {
 		console.log(err);
 	})
 
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require("mongoose");*/

@@ -50,6 +50,10 @@ app.locals.title = `${capitalized(projectName)} created with IronLauncher`;
 const index = require("./routes/index");
 app.use("/", index);
 
+/*this requires all the books routes
+const stories = require("./routes/stories");
+app.use("/", stories);*/
+
 const auth = require('./routes/auth');
 app.use('/', auth);
 

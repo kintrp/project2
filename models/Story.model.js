@@ -1,6 +1,3 @@
-
-/* const storySchema = new Schema({
-
 // TODO: Please make sure you edit the story model to whatever makes sense in this case
 const storySchema = new Schema({
 
