@@ -1,5 +1,16 @@
 <h1>Stories</h1>
 
+<div id='map' style='width: 100vw; height: 100vh;'></div>
+
+<script src="/js/mapbox.js"></script>
+
+<a href="/signup" class="button1">signup</a>
+<a href="/login" class="button">login</a>
+
+
+
+
+
 {{#each storyList}}
 
    <a href="/stories/{{_id}}">
@@ -12,15 +23,13 @@
        <br> <span style="color: black;font-weight:bold"></span> {{author}} </span> 
    </p>
 
-{{/each}} 
+   <p> city:
+       <br> <span style="color: black;font-weight:bold"></span> {{city}} </span> 
+   </p>
 
-      <div id='map' style='width: 100vw; height: 100vh;'></div>
+{{/each}}  
 
 
-<a href="/signup" class="button1">signup</a>
-<a href="/login" class="button">login</a>
- 
 
-            <script src="/js/mapbox.js"></script>
 
 

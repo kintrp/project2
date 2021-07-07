@@ -20,6 +20,15 @@
 
 </form>
 
+ 
+{{#each storyList}}
+    title: <h3>{{this.title}}</h3>
+    story: <h3>{{this.story}}</h3>
+    genre: <h3>{{this.genre}}</h3>
+    city:  <h3>{{this.city}}</h3>
+{{/each}} 
+
+
 <a href="/logout"> Log out</a>
 
 <a href="/movies" class="button">Back</a>

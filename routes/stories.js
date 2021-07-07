@@ -3,12 +3,13 @@ const router = express.Router();
 const User = require('../models/User.model');
 const Story = require('../models/Story.model');
 
-// render profile
-// add story 
+// render profile hbs in profile url
 
 router.get('/profile', (req, res, next) => {
 	res.render('profile', {user:req.session.user});
 });
+
+// Create stories by profile
 
 router.post('/profile', (req, res, next) => {
     const {title, story, genre, city} = req.body;
@@ -21,6 +22,8 @@ router.post('/profile', (req, res, next) => {
       next(err);
   });
   });
+
+// Show stories in stories url
 
 router.get('/stories', (req, res, next) => {
 	Story.find()
@@ -38,30 +41,42 @@ router.get('/stories', (req, res, next) => {
 router.get('/locations', (req, res, next) => {
   Story.find()
 		.then(storyFromDB => {
-
-			res.json({stories:storyFromDB});
+      postalCodes = storyFromDB.map(e=>e.city)
+        console.log(postalCodes);
+			res.json({stories:postalCodes});
 		})
 		.catch(err => {
 			console.log(err)
 		})
 })
 
-// Details
+// show stories in profile
 
-/* 
-
-router.get('/:id', (req,res, next)=> {
-  const celebId = req.params.id;
-  console.log(celebId);
-  Celebrity.findById(celebId)
-    .then(celebDetails => {
-      res.render('celebrities/show', {details : celebDetails })
-      console.log(celebDetails);
+router.get('/stories', (req,res, next)=> {
+  const storyId = req.params.id;
+  console.log(storyId);
+  Story.findById(storyId)
+    .then(storyFromDB => {
+			res.render('stories', { storyList: storyFromDB });
+		})
+    (storyDetails => {
+      res.render('details', {details : storyDetails })
+      console.log(storyDetails);
     })
     .catch(error => console.log('error while retrieving data from DB', error))
 }) 
 
-*/
+// details
 
+router.get('/stories/:id', (req,res, next)=> {
+  const storyId = req.params.id;
+  console.log(storyId);
+  Story.findById(storyId)
+    .then(storyDetails => {
+      res.render('details', {details : storyDetails })
+      console.log(storyDetails);
+    })
+    .catch(error => console.log('error while retrieving data from DB', error))
+}) 
 
 module.exports = router;
