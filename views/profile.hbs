@@ -29,6 +29,11 @@
 {{/each}} 
 
 
+  <form action="/stories/{{this._id}}/delete" method="POST">
+        <button class="general-button delete-button" type="sumbit">Delete</button>
+  </form>
+
+<a href="/stories" class="button">other stories</a>
+
 <a href="/logout"> Log out</a>
 
-<a href="/movies" class="button">Back</a>

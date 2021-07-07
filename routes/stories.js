@@ -5,9 +5,11 @@ const Story = require('../models/Story.model');
 
 // render profile hbs in profile url
 
+/* 
 router.get('/profile', (req, res, next) => {
-	res.render('profile', {user:req.session.user});
-});
+res.render('profile', {user:req.session.user});
+}); 
+*/
 
 // Create stories by profile
 
@@ -52,19 +54,14 @@ router.get('/locations', (req, res, next) => {
 
 // show stories in profile
 
-router.get('/stories', (req,res, next)=> {
-  const storyId = req.params.id;
-  console.log(storyId);
-  Story.findById(storyId)
-    .then(storyFromDB => {
-			res.render('stories', { storyList: storyFromDB });
-		})
-    (storyDetails => {
-      res.render('details', {details : storyDetails })
-      console.log(storyDetails);
-    })
-    .catch(error => console.log('error while retrieving data from DB', error))
-}) 
+router.get('/profile', (req, res, next) => {
+    console.log('Hello');
+Story.find({author: req.session.user.username})
+  .then(storiesFromDB => {
+    console.log(storiesFromDB, req.session.user.username);
+  res.render('profile', { storyList: storiesFromDB, user:req.session.user });
+  })
+  })
 
 // details
 
@@ -78,5 +75,22 @@ router.get('/stories/:id', (req,res, next)=> {
     })
     .catch(error => console.log('error while retrieving data from DB', error))
 }) 
+
+// delete
+
+/* 
+router.post('/stories/delete/:id', (req, res, next) => {
+	const storyId = req.params.id;
+	// delete this story	
+	Story.findByIdAndDelete(storyId)
+		.then(() => {
+			// redirect to the stories list
+			res.redirect('/stories');
+		})
+		.catch(err => {
+			console.log(err);
+		})
+}); 
+*/
 
 module.exports = router;
