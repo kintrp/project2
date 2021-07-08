@@ -25,43 +25,41 @@ router.post('/profile', (req, res, next) => {
   });
   });
 
-// Show stories in stories url
+// Display userstories in profile
 
-router.get('/stories', (req, res, next) => {
-	Story.find()
-		.then(storyFromDB => {
+  router.get('/stories', (req, res, next) => {
+    Story.find()
+      .then(storiesFromDB => {
+        res.render('stories', { storyList: storiesFromDB });
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  });
 
-			res.render('stories', { storyList: storyFromDB });
-		})
-		.catch(err => {
-			console.log(err)
-		})
-});
 
-// locations stories
+// get coordinates from DB as JSON
+  
+  router.get('/markers', (req, res, next) => {
+    Story.find()
+      .then(storiesFromDB => {
 
-router.get('/locations', (req, res, next) => {
-  Story.find()
-		.then(storyFromDB => {
-      postalCodes = storyFromDB.map(e=>e.city)
-        console.log(postalCodes);
-			res.json({stories:postalCodes});
-		})
-		.catch(err => {
-			console.log(err)
-		})
-})
+        res.json({stories:storiesFromDB});
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  });
 
-// show stories in profile
+// show authors stories in profile
 
 router.get('/profile', (req, res, next) => {
-    console.log('Hello');
-Story.find({author: req.session.user.username})
+  Story.find({author: req.session.user.username})
   .then(storiesFromDB => {
     console.log(storiesFromDB, req.session.user.username);
   res.render('profile', { storyList: storiesFromDB, user:req.session.user });
   })
-  })
+})
 
 // details
 
@@ -76,21 +74,18 @@ router.get('/stories/:id', (req,res, next)=> {
     .catch(error => console.log('error while retrieving data from DB', error))
 }) 
 
-// delete
-
-/* 
-router.post('/stories/delete/:id', (req, res, next) => {
+// delete a story
+ 
+router.post('/stories/:id/delete', (req, res, next) => {
 	const storyId = req.params.id;
-	// delete this story	
+  console.log(req.params.id);
 	Story.findByIdAndDelete(storyId)
 		.then(() => {
-			// redirect to the stories list
-			res.redirect('/stories');
+			res.redirect('/profile');
 		})
 		.catch(err => {
 			console.log(err);
 		})
 }); 
-*/
 
 module.exports = router;

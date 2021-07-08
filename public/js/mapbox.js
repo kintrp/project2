@@ -17,29 +17,41 @@ map.addControl(nav, 'top-left');
 
 // Axios
 
-let markers = [];
-axios.get(`http://localhost:3000/locations`)
+axios.get(`http://localhost:3000/markers`)
 		.then(response => {
 			//console.log(response.data.stories);
 
-            response.data.stories.forEach(postalCode => {
-                //console.log(postalCode);
-                axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${postalCode}%20Germany.json?access_token=pk.eyJ1Ijoia2ludHJwIiwiYSI6ImNrcXM1OWQ1ZjFta2Qybm1ocTk2cG84djMifQ.m7fogXVWDffNLgmhb0Pe5g`)
+            response.data.stories.forEach(story => {
+                axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${story.city}%20Germany.json?access_token=pk.eyJ1Ijoia2ludHJwIiwiYSI6ImNrcXM1OWQ1ZjFta2Qybm1ocTk2cG84djMifQ.m7fogXVWDffNLgmhb0Pe5g`)
                 .then(response=> {
-                    //console.log(response.data.features[0].geometry.coordinates);
-                    markers.push(response.data.features[0].geometry.coordinates);
-                    console.log(markers);
-
-                    markers.forEach(coord => {
+                    let coordinates = response.data.features[0].geometry.coordinates;
+                    
                         new mapboxgl.Marker({
                             color: 'red'
                         })
-                        .setLngLat(coord)
+                        .setLngLat(coordinates)
+
+                        .setPopup(new mapboxgl.Popup({ offset: 25 }) 
+                        .setHTML(
+
+                            `
+                            <h3>
+                                <a 
+                                href="http://localhost:3000/stories/${story._id}">  
+                                    ${story.title} 
+                                </a>
+                            </h3>
+
+                            <p> by: ${story.author}</p> 
+                            <p> type: ${story.genre}</p>
+                            `
+                        ))                        
                         .addTo(map)
-                    })  
                 })
             })          
 		})
 		.catch(err => {
-			console.log(err);
-		})
+		console.log(err);
+})
+
+
