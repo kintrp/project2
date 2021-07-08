@@ -17,7 +17,7 @@ map.addControl(nav, 'top-left');
 
 // Axios
 
-axios.get(`https://sharestoryberlin.herokuapp.com/markers`)
+axios.get(`/markers`)
 		.then(response => {
 			//console.log(response.data.stories);
 
