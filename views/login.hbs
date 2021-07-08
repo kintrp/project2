@@ -1,17 +1,24 @@
-<h1>Log in</h1>
+<h1 style='font-size:2em; font-weight:900'>Log in</h1>
 
 <form action="/login" method="POST">
 
-	<label for="username">Username: </label>
-	<input type="text" name="username" id="username">
+	<label for="username" style='font-size:1.6em'>Username: </label>
+	<input type="text" name="username" id="username" style='width: 300px; height:40px'>
 
-	<label for="password">Password: </label>
-	<input type="password" name="password" id="password">
+	<label for="password" style='font-size:1.6em'>Password: </label>
+	<input type="password" name="password" id="password" style='width: 300px; height:40px'>
 
-	<button type="submit">Log in</button>
+	<button type="submit" style='background-color: rgb(150, 85, 181); color:white; width:100px; height:40px; font-size:1.8em'>Log in</button>
 
 {{#if message}}
 	<p style="color: red">{{message}}</p>
 {{/if}}
 
 </form>
+
+<a href="/stories" class="button">Back</a>
+
+
+<img src="/images/kobu-agency-7okkFhxrxNw-unsplash.jpg" class="img-login">
+
+

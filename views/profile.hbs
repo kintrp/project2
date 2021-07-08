@@ -1,5 +1,56 @@
+
 <h1>Profile</h1>
 
 <h1>Hello {{user.username}}!</h1>
 
-<a href="/logout"> Log out</a>
+<form action="/profile" method="POST"\ style='display:flex'>
+
+    <label for="title" style='font-size:1.6em'>title:</label> 
+    <input id="title" type="text" name="title" style='width: 200px; height:40px'>
+
+    <label for="story" style='font-size:1.6em'>story:</label> 
+    <input id="story" type="text" name="story" style='width: 200px; height:40px; margin-left:10px'>
+
+    <label for="genre" style='font-size:1.6em'>genre:</label> 
+    <input id="genre" type="text" name="genre" style='width: 200px; height:40px; margin-left:10px'>
+  
+    <label for="city" style='font-size:1.6em'>city:</label> 
+    <input id="city" type="number" name="city" placeholder="Post Code" style='width: 200px; height:40px; margin-left:10px'>
+
+  <button type="submit" style='width: 100px; height:40px; background-color: rgb(150, 85, 181); color:white; margin-left:10px'>Add</button>
+
+</form>
+
+{{#each storyList}}
+    <h1>Title:</h1><h3>{{this.title}}</h3>
+    <h1>City:</h1>  <h3>{{this.city}}</h3>
+    <h1>Genre:</h1> <h3>{{this.genre}}</h3>
+    <h1>Story:</h1> <h3>{{this.story}}</h3>
+
+ 
+ <div style='display:flex; margin-top:50px'>
+
+  <form action="/stories/{{this._id}}/delete" method="POST">
+
+    <button class="general-button delete-button" type="sumbit" style='width: 100px; height:40px; background-color: rgb(150, 85, 181); color:white'>Delete</button>
+
+  </form>
+
+   <form action="/stories/{{this._id}}/edit" method="POST">
+
+    <button class="general-button edit-button" type="sumbit" style='width: 100px; height:40px; margin-left:20px;background-color: rgb(150, 85, 181); color:white'>Edit</button>
+
+  </form>
+
+  <a href="/stories" class="button">other stories</a>
+
+  <button style='width: 100px; height:40px; margin-left:20px; background-color: rgb(150, 85, 181); color:white'><a href="/logout" style='text-decoration:none; color:white'> Log out</a></button>
+
+</div>
+
+{{/each}} 
+
+ 
+
+
+
