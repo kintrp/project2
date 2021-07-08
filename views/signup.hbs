@@ -2,13 +2,13 @@
 
 <form action="/signup" method="POST">
 
-	<label for="username" style='font-size:1.6em'>Username: </label>
-	<input type="text" name="username" id="username" style='width: 300px; height:40px'>
+	<label for="username">Username: </label>
+	<input type="text" name="username" id="username">
 
-	<label for="password" style='font-size:1.6em'>Password: </label>
-	<input type="password" name="password" id="password" style='width: 300px; height:40px'>
+	<label for="password">Password: </label>
+	<input type="password" name="password" id="password">
 
-	<button type="submit" style='background-color: rgb(150, 85, 181); color:white; width:100px; height:40px; font-size:1.2em; margin-left:5px'>Sign up</button> <br>
+	<button type="submit">Sign up</button> <br>
     
 {{#if message}}
 	<p style="color: red">{{message}}</p>
@@ -16,6 +16,6 @@
 
 </form>
 
-<a href="/stories" class="button">Back</a>
+<img src="/images/guy.jpg" class="foto">
 
-<img src="/images/surface-8HPLpr3hebU-unsplash.jpg" class="img-login">
+<a href="/stories" class="button">Back</a>

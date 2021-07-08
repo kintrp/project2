@@ -93,24 +93,25 @@ router.post('/stories/:id/delete', (req, res, next) => {
 
 //editing stories
 
-/* router.get('/stories:id/edit', (req, res, next) => {
+  router.get('/:id/edit', (req, res, next) => {
   Story.findOneAndUpdate(req.params.id)
     .then(stories => {
-      res.render('/profile', {stories});
+      res.render('/stories', {stories});
     })
     .catch(err => {
       next(err);
     });
-}); */
+});
 
-router.post('/:id/edit', (req, res) => {
+
+/* router.post('/:id/edit', (req, res) => {
   const {id} = req.params;
   const {title, story, genre, city} = req.body;
 
   Story.findByIdAndUpdate(id, {title, story, genre, city}, {new: true})
   .then(updatedStory =>res.redirect('/edit'))
   .catch(error => next(error));
-});
+}); */
 
 
 module.exports = router;
