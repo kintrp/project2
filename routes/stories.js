@@ -3,12 +3,15 @@ const router = express.Router();
 const User = require('../models/User.model');
 const Story = require('../models/Story.model');
 
-// render profile
-// add story 
+// render profile hbs in profile url
 
+/* 
 router.get('/profile', (req, res, next) => {
-	res.render('profile', {user:req.session.user});
-});
+res.render('profile', {user:req.session.user});
+}); 
+*/
+
+// Create stories by profile
 
 router.post('/profile', (req, res, next) => {
     const {title, story, genre, city} = req.body;
@@ -22,46 +25,67 @@ router.post('/profile', (req, res, next) => {
   });
   });
 
-router.get('/stories', (req, res, next) => {
-	Story.find()
-		.then(storyFromDB => {
+// Display userstories in profile
 
-			res.render('stories', { storyList: storyFromDB });
-		})
-		.catch(err => {
-			console.log(err)
-		})
-});
+  router.get('/stories', (req, res, next) => {
+    Story.find()
+      .then(storiesFromDB => {
+        res.render('stories', { storyList: storiesFromDB });
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  });
 
-// locations stories
 
-router.get('/locations', (req, res, next) => {
-  Story.find()
-		.then(storyFromDB => {
+// get coordinates from DB as JSON
+  
+  router.get('/markers', (req, res, next) => {
+    Story.find()
+      .then(storiesFromDB => {
 
-			res.json({stories:storyFromDB});
-		})
-		.catch(err => {
-			console.log(err)
-		})
+        res.json({stories:storiesFromDB});
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  });
+
+// show authors stories in profile
+
+router.get('/profile', (req, res, next) => {
+  Story.find({author: req.session.user.username})
+  .then(storiesFromDB => {
+    console.log(storiesFromDB, req.session.user.username);
+  res.render('profile', { storyList: storiesFromDB, user:req.session.user });
+  })
 })
 
-// Details
+// details
 
-/* 
-
-router.get('/:id', (req,res, next)=> {
-  const celebId = req.params.id;
-  console.log(celebId);
-  Celebrity.findById(celebId)
-    .then(celebDetails => {
-      res.render('celebrities/show', {details : celebDetails })
-      console.log(celebDetails);
+router.get('/stories/:id', (req,res, next)=> {
+  const storyId = req.params.id;
+  console.log(storyId);
+  Story.findById(storyId)
+    .then(storyDetails => {
+      res.render('details', {details : storyDetails })
+      console.log(storyDetails);
     })
     .catch(error => console.log('error while retrieving data from DB', error))
 }) 
 
-*/
-
+// delete a story
+ 
+router.post('/stories/:id/delete', (req, res, next) => {
+	const storyId = req.params.id;
+  console.log(req.params.id);
+	Story.findByIdAndDelete(storyId)
+		.then(() => {
+			res.redirect('/profile');
+		})
+		.catch(err => {
+			console.log(err);
+		})
+}); 
 
 module.exports = router;

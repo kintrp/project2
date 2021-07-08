@@ -16,12 +16,14 @@ const loginCheck = () => {
   }
 }
 
+/* 
 router.get('/profile', loginCheck(), (req, res, next) => {
   console.log('this is the cookie: ', req.cookies)
   res.cookie('myCookie', 'hello world');
   res.clearCookie('myCookie');
   const loggedInUser = req.session.user
   res.render('profile', { user: loggedInUser });
-});
+}); 
+*/
 
 module.exports = router;
