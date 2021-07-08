@@ -25,43 +25,41 @@ router.post('/profile', (req, res, next) => {
   });
   });
 
-// Show stories in stories url
+// Display userstories in profile
 
-router.get('/stories', (req, res, next) => {
-	Story.find()
-		.then(storyFromDB => {
+  router.get('/stories', (req, res, next) => {
+    Story.find()
+      .then(storiesFromDB => {
+        res.render('stories', { storyList: storiesFromDB });
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  });
 
-			res.render('stories', { storyList: storyFromDB });
-		})
-		.catch(err => {
-			console.log(err)
-		})
-});
 
-// locations stories
+// get coordinates from DB as JSON
+  
+  router.get('/markers', (req, res, next) => {
+    Story.find()
+      .then(storiesFromDB => {
 
-router.get('/locations', (req, res, next) => {
-  Story.find()
-		.then(storyFromDB => {
-      postalCodes = storyFromDB.map(e=>e.city)
-        console.log(postalCodes);
-			res.json({stories:postalCodes});
-		})
-		.catch(err => {
-			console.log(err)
-		})
-})
+        res.json({stories:storiesFromDB});
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  });
 
-// show stories in profile
+// show authors stories in profile
 
 router.get('/profile', (req, res, next) => {
-    console.log('Hello');
-Story.find({author: req.session.user.username})
+  Story.find({author: req.session.user.username})
   .then(storiesFromDB => {
     console.log(storiesFromDB, req.session.user.username);
   res.render('profile', { storyList: storiesFromDB, user:req.session.user });
   })
-  })
+})
 
 // details
 
@@ -76,42 +74,45 @@ router.get('/stories/:id', (req,res, next)=> {
     .catch(error => console.log('error while retrieving data from DB', error))
 }) 
 
-// delete the stories
-
+// delete a story
+ 
 router.post('/stories/:id/delete', (req, res, next) => {
 	const storyId = req.params.id;
-	// delete this story	
+  console.log(req.params.id);
 	Story.findByIdAndDelete(storyId)
 		.then(() => {
-			// redirect to the stories list
-			res.redirect('/stories');
+			res.redirect('/profile');
 		})
 		.catch(err => {
 			console.log(err);
 		})
 }); 
 
-//editing stories
+//edit the story
 
-/* router.get('/stories:id/edit', (req, res, next) => {
-  Story.findOneAndUpdate(req.params.id)
-    .then(stories => {
-      res.render('/profile', {stories});
+router.get('/stories/:id/edit', (req, res, next) => {
+  Story.findById(req.params.id)
+    .then(story => {
+      res.render('edit', {story});
     })
     .catch(err => {
       next(err);
     });
-}); */
-
-router.post('/:id/edit', (req, res) => {
-  const {id} = req.params;
-  const {title, story, genre, city} = req.body;
-
-  Story.findByIdAndUpdate(id, {title, story, genre, city}, {new: true})
-  .then(updatedStory =>res.redirect('/edit'))
-  .catch(error => next(error));
 });
 
+router.post('/stories/:id/edit', (req, res, next) => {
+	const storyId = req.params.id;
+  const { title, genre, city, author, story } = req.body;
+  console.log(req.params.id);
+	Story.findByIdAndUpdate(storyId, { title, genre, city, author, story }
+
+  )
+		.then(() => {
+			res.redirect('/profile');
+		})
+		.catch(err => {
+			console.log(err);
+		})
+}); 
 
 module.exports = router;
-

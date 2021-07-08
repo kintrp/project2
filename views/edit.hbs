@@ -1,8 +1,8 @@
 <h1>Edit this story</h1>
 
-{{#each story}}
+{{#with story}}
 
-<form action="/stories/{{ stories._id}}" method="POST">
+<form action="/stories/{{_id}}/edit" method="POST">
 
 	<label for="title">Title: </label>
 	<input type="text" id="title" name="title" value="{{title}}">
@@ -15,8 +15,11 @@
 
 	<label for="city">City: </label>
 	<input type="number" id="city" name="city" value="{{city}}">
+
+	<label for="story">Story: </label>
+	<input type="string" id="story" name="story" value="{{story}}">
 	<button type="submit">Update this story</button>
     
 </form>
 
-{{/each}}
+{{/with}}
