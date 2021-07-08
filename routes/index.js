@@ -2,7 +2,7 @@ const router = require("express").Router();
 
 /* GET home page */
 router.get("/", (req, res, next) => {
-  res.render("index");
+  res.redirect("/stories");
 });
 
 // middleware: checkin wether user is logged in

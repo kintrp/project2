@@ -42,6 +42,7 @@ axios.get(`http://localhost:3000/markers`)
                                 </a>
                             </h3>
 
+
                             <p> by: ${story.author}</p> 
                             <p> type: ${story.genre}</p>
                             `
@@ -53,5 +54,6 @@ axios.get(`http://localhost:3000/markers`)
 		.catch(err => {
 		console.log(err);
 })
+
 
 
