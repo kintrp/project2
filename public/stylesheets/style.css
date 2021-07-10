@@ -61,3 +61,13 @@ body{
   right: 400px;
 }
 
+@media only screen and (max-width:500px) {
+  /* For mobile phones: */
+  .center {
+    width: 100%;
+  }
+}
+
+html {
+  min-width: fit-content;
+}

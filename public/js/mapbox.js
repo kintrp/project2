@@ -19,7 +19,7 @@ map.addControl(nav, 'top-left');
 
 axios.get(`http://localhost:3000/markers`)
 		.then(response => {
-			//console.log(response.data.stories);
+			console.log(response.data.stories);
 
             response.data.stories.forEach(story => {
                 axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${story.city}%20Germany.json?access_token=pk.eyJ1Ijoia2ludHJwIiwiYSI6ImNrcXM1OWQ1ZjFta2Qybm1ocTk2cG84djMifQ.m7fogXVWDffNLgmhb0Pe5g`)
