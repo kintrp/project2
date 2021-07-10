@@ -88,4 +88,32 @@ router.post('/stories/:id/delete', (req, res, next) => {
 		})
 }); 
 
+//edit the story
+
+router.get('/stories/:id/edit', (req, res, next) => {
+  Story.findById(req.params.id)
+    .then(story => {
+      res.render('edit', {story});
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+router.post('/stories/:id/edit', (req, res, next) => {
+	const storyId = req.params.id;
+  const { title, genre, city, author, story } = req.body;
+  console.log(req.params.id);
+	Story.findByIdAndUpdate(storyId, { title, genre, city, author, story }
+
+  )
+		.then(() => {
+			res.redirect('/profile');
+		})
+		.catch(err => {
+			console.log(err);
+		})
+}); 
+
+
 module.exports = router;

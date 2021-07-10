@@ -20,22 +20,27 @@
 
   {{#each storyList}}
 
+<<<<<<< HEAD
       <div style="margin-top: 50px; background-color: white; height: 150px; width: 900px;">
+=======
+      <div style="margin-top: 50px; background-color: white; height: 165px; width: 900px; padding:10px;">
+>>>>>>> 64d081eba5f072bc999e4b90af943a4c1438cfeb
 
           <span style="color: black;font-weight:bold"> title: </span> {{ this.title }} 
           <span style="color: black;font-weight:bold"> genre: </span> {{ this.genre }}  
-          <span style="color: black;font-weight:bold"> city: </span> {{ this.city }} <br>
+          <span style="color: black;font-weight:bold"> city: </span> {{ this.city }} <br><br>
           <span style="color: black;font-weight:bold"> story: </span> {{ this.story }} 
 
           <form action="/stories/{{this._id}}/delete" method="POST">
-                <button class="general-button delete-button" type="sumbit">Delete</button>
+                <button class="general-button delete-button" type="sumbit" style='margin-top:8px; background-color:rgb(167, 111, 167)'>Delete</button>
           </form>
+
+          <button class="general-button edit-button" type="sumbit" style='margin-top:8px; background-color:rgb(167, 111, 167); width:55px'><a href="/stories/{{this._id}}/edit" style='text-decoration: none; color:black'>Edit</a></button>
+
 
     </div>
 
   {{/each}} 
-
- 
 
 
 

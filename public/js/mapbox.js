@@ -17,7 +17,7 @@ map.addControl(nav, 'top-left');
 
 // Axios
 
-axios.get(`http://localhost:3000/markers`)
+axios.get(`/markers`)
 		.then(response => {
 			console.log(response.data.stories);
 
@@ -37,10 +37,11 @@ axios.get(`http://localhost:3000/markers`)
                             `
                             <h3>
                                 <a 
-                                href="http://localhost:3000/stories/${story._id}">  
+                                href="https://sharestoryberlin.herokuapp.com/stories/${story._id}">  
                                     ${story.title} 
                                 </a>
                             </h3>
+
 
                             <p> by: ${story.author}</p> 
                             <p> type: ${story.genre}</p>
@@ -53,5 +54,6 @@ axios.get(`http://localhost:3000/markers`)
 		.catch(err => {
 		console.log(err);
 })
+
 
 
